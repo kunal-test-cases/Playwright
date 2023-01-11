@@ -74,6 +74,8 @@ test.only("extract multiple web elements", async ({ browser }) => {
   await password.fill("learning");
   await signIn.click();
 
+  console.log(await cardTitles.allTextContents());
   console.log(await cardTitles.first().textContent());
   console.log(await cardTitles.nth(1).textContent());
+  console.log(await cardTitles.allTextContents());
 });
