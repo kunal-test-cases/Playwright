@@ -31,6 +31,9 @@ const config = {
 
   use: {
     browserName: "chromium",
+    // browserName: "firefox",
+    // browserName: "webkit",
+    // headless: true,
   },
 };
 

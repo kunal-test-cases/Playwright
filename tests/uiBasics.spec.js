@@ -1,4 +1,4 @@
-const { test } = require("@playwright/test");
+const { test, expect } = require("@playwright/test");
 
 test("browser context playwright test", async ({ browser }) => {
   const context = await browser.newContext();
@@ -13,4 +13,7 @@ test("page playwright test", async ({ page }) => {
 //Playwright will run below test only and skip all the remaining tests in this file.
 test.only("page playwright test only", async ({ page }) => {
   await page.goto("https://google.com/");
+
+  //assert page title
+  await expect(page).toHaveTitle("Google");
 });
