@@ -27,13 +27,53 @@ test("type into input elements using page locators", async ({ browser }) => {
   await page.locator("button.signInBtn").click();
 });
 
-test.only("extract error text", async ({ browser }) => {
+test("extract error text", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
+
+  const userName = page.locator("input#username");
+  const password = page.locator("input#password");
+  const signIn = page.locator("input#signInBtn");
+
   await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
-  await page.locator("input#username").type("kunal");
-  await page.locator("input#password").type("12345");
-  await page.locator("input#signInBtn").click();
+
+  await userName.type("kunal");
+  await password.type("12345");
+  await signIn.click();
+
   console.log(await page.locator("[style*=block]").textContent());
   await expect(page.locator("[style*=block]")).toContainText("Incorrect");
+
+  await userName.fill("");
+  await userName.fill("rahulshettyacademy");
+  await password.fill("");
+  await password.fill("learning");
+});
+
+test.only("extract multiple web elements", async ({ browser }) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  const userName = page.locator("input#username");
+  const password = page.locator("input#password");
+  const signIn = page.locator("input#signInBtn");
+  const cardTitles = page.locator(".card-body a");
+
+  await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+
+  await userName.type("kunal");
+  await password.type("12345");
+  await signIn.click();
+
+  console.log(await page.locator("[style*=block]").textContent());
+  await expect(page.locator("[style*=block]")).toContainText("Incorrect");
+
+  await userName.fill("");
+  await userName.fill("rahulshettyacademy");
+  await password.fill("");
+  await password.fill("learning");
+  await signIn.click();
+
+  console.log(await cardTitles.first().textContent());
+  console.log(await cardTitles.nth(1).textContent());
 });
