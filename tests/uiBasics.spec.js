@@ -72,10 +72,18 @@ test.only("extract multiple web elements", async ({ browser }) => {
   await userName.fill("rahulshettyacademy");
   await password.fill("");
   await password.fill("learning");
+
+  /*   
+  // 1. not recommended way
   await signIn.click();
 
-  console.log(await cardTitles.allTextContents());
+  console.log(await cardTitles.allTextContents()); // here the list will be [], because playwright don't wait incase of allTextContents()
   console.log(await cardTitles.first().textContent());
   console.log(await cardTitles.nth(1).textContent());
+  console.log(await cardTitles.allTextContents()); // here the list will have elements because on above line we called textContent(), which has auto-wait 
+*/
+
+  // 2. recommended way - wait for an immediate navigation upon button click
+  await Promise.all([page.waitForNavigation(), signIn.click()]);
   console.log(await cardTitles.allTextContents());
 });
