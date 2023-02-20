@@ -38,3 +38,18 @@ test("Handling UI elements", async ({ page }) => {
 
   await page.pause();
 });
+
+test("Handling child windows", async ({ browser }) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  await page.goto("https://rahulshettyacademy.com/loginpagePractise");
+  const blinkingText = page.locator("[href*='documents-request']");
+
+  const [newPage] = await Promise.all([
+    context.waitForEvent("page"), // wait for a new page in separate tab
+    blinkingText.click(),
+  ]);
+
+  const text = await newPage.locator(".red").textContent();
+  console.log(text);
+});
