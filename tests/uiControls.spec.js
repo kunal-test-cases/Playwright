@@ -30,7 +30,7 @@ test("Handling UI elements", async ({ page }) => {
   await expect(checkbox).toBeChecked();
   console.log(await checkbox.isChecked());
   await checkbox.uncheck();
-  await expect(await checkbox.isChecked()).toBeFalsy();
+  expect(await checkbox.isChecked()).toBeFalsy();
 
   await page.pause();
 });
