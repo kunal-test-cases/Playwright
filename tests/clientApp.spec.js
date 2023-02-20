@@ -42,3 +42,15 @@ test("register user", async ({ page }) => {
 
   await register.click();
 });
+
+test("login user", async ({ page }) => {
+  await page.goto("https://rahulshettyacademy.com/client");
+  await page.locator("input#userEmail").fill("kunal@sharklasers.com");
+  await page.locator("input#userPassword").fill("Kunal@123");
+  await page.locator("[value='Login']").click();
+
+  await page.waitForLoadState("networkidle"); // wait for network calls to happen
+
+  const titles = await page.locator(".card-body b").allTextContents();
+  console.log(titles);
+});
