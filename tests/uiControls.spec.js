@@ -32,5 +32,9 @@ test("Handling UI elements", async ({ page }) => {
   await checkbox.uncheck();
   expect(await checkbox.isChecked()).toBeFalsy();
 
+  //blinking text
+  const blinkingText = page.locator("[href*='documents-request']");
+  await expect(blinkingText).toHaveAttribute("class", "blinkingText");
+
   await page.pause();
 });
