@@ -34,6 +34,8 @@ const config = {
     // browserName: "firefox",
     // browserName: "webkit",
     // headless: true,
+    // screenshot: "on",
+    // trace: "on",
   },
 };
 
