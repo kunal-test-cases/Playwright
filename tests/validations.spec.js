@@ -31,3 +31,8 @@ test("confirm popup", async ({ page }) => {
   // page.on("dialog", (dialog) => dialog.dismiss());
   // await page.locator("#confirmbtn").click();
 });
+
+test("mouse hover", async ({ page }) => {
+  await page.goto("https://rahulshettyacademy.com/AutomationPractice");
+  await page.locator("#mousehover").hover();
+});
