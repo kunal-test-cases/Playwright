@@ -36,3 +36,13 @@ test("mouse hover", async ({ page }) => {
   await page.goto("https://rahulshettyacademy.com/AutomationPractice");
   await page.locator("#mousehover").hover();
 });
+
+test("frame handling", async ({ page }) => {
+  await page.goto("https://rahulshettyacademy.com/AutomationPractice");
+  page.pause();
+  const framePage = page.frameLocator("#courses-iframe");
+
+  await framePage.locator("li a[href*='lifetime-access']:visible").click();
+  const textCheck = await framePage.locator(".text h2").textContent();
+  console.log(textCheck.split(" ")[1]);
+});
