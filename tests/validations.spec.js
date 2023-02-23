@@ -22,3 +22,12 @@ test("input element show/hide", async ({ page }) => {
   await page.locator("#hide-textbox").click();
   await expect(await page.locator("#displayed-text")).toBeHidden();
 });
+
+test("confirm popup", async ({ page }) => {
+  await page.goto("https://rahulshettyacademy.com/AutomationPractice");
+  page.on("dialog", (dialog) => dialog.accept());
+  await page.locator("#confirmbtn").click();
+
+  // page.on("dialog", (dialog) => dialog.dismiss());
+  // await page.locator("#confirmbtn").click();
+});
