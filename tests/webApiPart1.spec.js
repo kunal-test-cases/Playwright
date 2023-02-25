@@ -5,6 +5,8 @@ const loginPayLoad = {
   userPassword: "Iamking@000",
 };
 
+let token = null;
+
 //execute only once before all the test cases.
 test.beforeAll(async () => {
   const apiContext = await request.newContext();
@@ -20,4 +22,15 @@ test.beforeAll(async () => {
 
   const loginResponseJson = await loginResponse.json();
   console.log(loginResponseJson.token);
+  token = loginResponseJson.token;
+});
+
+test("bypass login page by storing token into local storage", async ({
+  page,
+}) => {
+  page.addInitScript((value) => {
+    window.localStorage.setItem("token", value);
+  }, token);
+
+  await page.goto("https://rahulshettyacademy.com/client/");
 });
